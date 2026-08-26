@@ -1,69 +1,38 @@
 class Solution {
 public:
     string shortestBeautifulSubstring(string s, int k) {
+        int n = s.length();
 
-        string result ;
-        int count = 0;
-        for(int i=0; i<s.size(); i++)
+        int i=0;
+        int j=0;
+        int ones = 0;
+
+        string result = "";
+
+        while(j<n)
         {
-            if (s[i] == '1')
-            count++;
-        }
+            if(s[j] == '1')
+            ones++;
 
-        if (count<k)
-        return result;
-        else
-        result = s;
-
-        for(int i=0; i<s.size(); i++)
-        {   string ans;
-            count = 0;
-            for(int j=i; j<s.size(); j++)
-            {   if(count<k)
-                {
-                ans += s[j];
-                    if(s[j] == '1')
-                    count++;
-                }
-                else
-                break;
-
-            }
-
-          if(count == k && ans.size()<=result.size())
-          {
-           if (ans.size() == result.size())
-           { int n=0;
-                while(n<ans.size())
-                {
-                    if(ans[n] == result[n])
-                    {
-                        n++;
-                    }
-                    else if(ans[n]>result[n])
-                    {
-                        result = result;
-                        break;
-                    }
-                    else
-                    {
-                        result = ans;
-                        break;
-                    }
-
-
-                }
-            }
-            else
+            while(ones>k || s[i]=='0')
             {
-                    result = ans;
+                if(s[i] == '1')
+                    ones--;
+                i++;
             }
-           }
-          
 
+            if(ones == k)
+            {
+                string temp = s.substr(i,j-i+1);
+                if(result.empty() || result.length()>j-i+1 || (temp.length() == result.length() && temp<result))
+                {
+                    result = temp;
+                }
+            }
+
+            j++;
         }
 
         return result;
-        
     }
 };
