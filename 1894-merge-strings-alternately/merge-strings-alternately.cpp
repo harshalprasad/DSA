@@ -6,34 +6,17 @@ public:
         bool flag = true;
         string ans;
 
-        while(i<word1.size() && j<word2.size())
+        while(i<word1.size() || j<word2.size())
         {
-            if(flag)
-            {
-              ans += word1[i];
-              flag = false;
-              i++;
-            }
-            else
-            {
-                ans += word2[j];
-                flag = true;
-                j++;
-            }
+            if(i<word1.size())
+            ans += word1[i++];
+
+            if(j<word2.size())
+            ans += word2[j++];
 
         }
 
-        while(i<word1.size())
-        {
-            ans+=word1[i];
-            i++;
-        }
-
-        while(j<word2.size())
-        {
-            ans += word2[j];
-            j++;
-        }
+       
 
         return ans;
 
